@@ -3,6 +3,8 @@ from src.order import Item, Order
 from src.address import Address
 from src.countries import Country
 from src.product import Product
+from test.test_shipping import MockRegionStore
+from src.shipping import ShippingCalculator
 import pytest
 
 
@@ -43,3 +45,15 @@ def test_add_item_to_order_throws_value_error_when_not_enough_stock_in_warehouse
 
     with pytest.raises(ValueError):
         order.add_item(warehouse=warehouse, item=item)
+
+
+def test_calculate_total_returns_correct_value(
+    mock_address: Address, mock_product: Product
+) -> None:
+    warehouse = Warehouse(catalogue=[Entry(product=mock_product, stock=6)])
+    order = Order(shipping_address=mock_address, items=[])
+    item = Item(product=mock_product, quantity=4)
+    order.add_item(warehouse=warehouse, item=item)
+    
+    shipping_calculator = ShippingCalculator(region_store=MockRegionStore())
+    assert order.calculate_total(shipping_calculator=shipping_calculator) == 10.99
