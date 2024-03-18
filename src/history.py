@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from src.address import Address
 from src.order import Order
 from src.product import Product
 
@@ -15,3 +16,6 @@ class SalesHistory:
                     yield order
 
         return list(iter_orders_containing_product())
+
+    def get_orders_with_address(self, address: Address) -> list[Order]:
+        return [o for o in self.orders if o.shipping_address == address]

@@ -36,3 +36,33 @@ def test_get_orders_containing_product_returns_correct_orders() -> None:
     assert history.get_orders_containing_product(product=expected_product) == [
         expected_order
     ]
+
+
+def test_get_orders_with_address_returns_correct_orders() -> None:
+    expected_address = Address(
+        house="mock_house",
+        street="mock_street",
+        city="mock_city",
+        postcode="MOCK POSTCODE",
+        country=Country.UNITED_KINGDOM,
+    )
+    expected_order = Order(
+        shipping_address=expected_address,
+        items=[Item(Product(id=4, description="type 2", price=7.5), quantity=6)],
+    )
+    history = SalesHistory(
+        orders=[
+            Order(
+                shipping_address=Address(
+                    house="mock_house_2",
+                    street="mock_street_2",
+                    city="mock_city_2",
+                    postcode="MOCK POSTCODE_2",
+                    country=Country.FRANCE,
+                ),
+                items=[Item(Product(id=5, description="type 3", price=3.1), 12)],
+            ),
+            expected_order,
+        ]
+    )
+    assert history.get_orders_with_address(address=expected_address) == [expected_order]
