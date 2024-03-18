@@ -27,7 +27,7 @@ class ShippingCalculator:
         shipping = 0.0
 
         if region == "UK":
-            if order_total < 100.0:
+            if order_total < 120.0:
                 shipping = 4.99
 
         if region == "EU":
@@ -37,6 +37,9 @@ class ShippingCalculator:
                 shipping = 4.99
 
         if region == "OTHER":
-            shipping = 9.99
+            if order_total >= 200:
+                shipping = 5.99
+            else:
+                shipping = 9.99
 
         return shipping
