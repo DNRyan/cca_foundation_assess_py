@@ -1,12 +1,14 @@
 import requests as requests
 
+from src.countries import Country
+
 
 class RegionStore:
     @staticmethod
-    def get_region(country: str) -> str:
+    def get_region(country: Country) -> str:
         url = (
             "https://npovmrfcyzu2gu42pmqa7zce6a0zikbf.lambda-url.eu-west-2.on.aws/?country="
-            + country
+            + country.value
         )
 
         response = requests.get(url)
@@ -20,7 +22,7 @@ class ShippingCalculator:
     def __init__(self, region_store: RegionStore) -> None:
         self._region_store = region_store
 
-    def calculate_shipping(self, country, order_total) -> float:
+    def calculate_shipping(self, country: Country, order_total: float) -> float:
         region = self._region_store.get_region(country=country)
         shipping = 0.0
 

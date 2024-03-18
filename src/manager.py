@@ -29,7 +29,7 @@ class OrderManager:
             [item.quantity * item.product.price for item in self._order.items]
         )
         shipping_cost = self._shipping.calculate_shipping(
-            self._order.shipping_address.country.value, order_total
+            self._order.shipping_address.country, order_total
         )
         return order_total + shipping_cost
 

@@ -16,32 +16,32 @@ if __name__ == "__main__":
                 (
                     Country.UNITED_KINGDOM.value,
                     99.99,
-                    calculator.calculate_shipping(Country.UNITED_KINGDOM.value, 99.99),
+                    calculator.calculate_shipping(Country.UNITED_KINGDOM, 99.99),
                 ),
                 (
                     Country.UNITED_KINGDOM.value,
                     100.00,
-                    calculator.calculate_shipping(Country.UNITED_KINGDOM.value, 100.00),
+                    calculator.calculate_shipping(Country.UNITED_KINGDOM, 100.00),
                 ),
                 (
                     Country.FRANCE.value,
                     99.99,
-                    calculator.calculate_shipping(Country.FRANCE.value, 99.99),
+                    calculator.calculate_shipping(Country.FRANCE, 99.99),
                 ),
                 (
                     Country.FRANCE.value,
                     100.00,
-                    calculator.calculate_shipping(Country.FRANCE.value, 100.00),
+                    calculator.calculate_shipping(Country.FRANCE, 100.00),
                 ),
                 (
                     Country.ALBANIA.value,
                     99.99,
-                    calculator.calculate_shipping(Country.ALBANIA.value, 99.99),
+                    calculator.calculate_shipping(Country.ALBANIA, 99.99),
                 ),
                 (
                     Country.ALBANIA.value,
                     100.00,
-                    calculator.calculate_shipping(Country.ALBANIA.value, 100.00),
+                    calculator.calculate_shipping(Country.ALBANIA, 100.00),
                 ),
             ]
         )
