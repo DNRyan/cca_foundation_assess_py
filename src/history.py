@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from order import Order
+from src.order import Order
 
 
 @dataclass
