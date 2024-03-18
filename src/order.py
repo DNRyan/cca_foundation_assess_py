@@ -18,5 +18,9 @@ class Order:
 
 
 def add_item_to_order(order: Order, warehouse: Warehouse, item: Item) -> None:
+    available_stock = warehouse.get_product_stock(product=item.product)
+    if available_stock < item.quantity:
+        raise ValueError("Required stock not available for product")
+
     order.items.append(item)
     warehouse.reduce_product_stock(product=item.product, amount_to_remove=item.quantity)

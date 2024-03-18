@@ -32,3 +32,14 @@ def test_add_item_to_order_successful_when_quantity_available_in_warehouse_and_w
     add_item_to_order(order=order, warehouse=warehouse, item=item)
     assert warehouse.get_product_stock(product=mock_product) == 1
     assert item in order.items
+
+
+def test_add_item_to_order_throws_value_error_when_not_enough_stock_in_warehouse(
+    mock_address: Address, mock_product: Product
+) -> None:
+    warehouse = Warehouse(catalogue=[Entry(product=mock_product, stock=2)])
+    order = Order(shipping_address=mock_address, items=[])
+    item = Item(product=mock_product, quantity=4)
+
+    with pytest.raises(ValueError):
+        add_item_to_order(order=order, warehouse=warehouse, item=item)
