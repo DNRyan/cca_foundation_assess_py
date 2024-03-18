@@ -21,3 +21,10 @@ class Warehouse:
     def reduce_product_stock(self, product: Product, amount_to_remove: int) -> None:
         entry = next(e for e in self.catalogue if e.product == product)
         entry.stock = entry.stock - amount_to_remove
+
+    def add_product_stock(self, product: Product, amount_to_add: int) -> None:
+        entry = next((e for e in self.catalogue if e.product == product), None)
+        if entry is not None:
+            entry.stock = entry.stock + amount_to_add
+            return
+        self.catalogue.append(Entry(product=product, stock=amount_to_add))
