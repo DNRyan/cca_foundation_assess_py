@@ -60,3 +60,14 @@ def test_calculate_total_returns_correct_value(
     item = Item(product=mock_product, quantity=4)
     mock_order_manager.add_item(item=item)
     assert mock_order_manager.calculate_total() == 10.99
+
+
+def test_confirm_adjusts_stock_and_adds_order_to_history(
+    mock_order_manager: OrderManager, mock_product: Product
+) -> None:
+    item = Item(product=mock_product, quantity=4)
+    mock_order_manager.add_item(item=item)
+    mock_order_manager.confirm()
+
+    assert mock_order_manager._order in mock_order_manager._history.orders
+    assert mock_order_manager._warehouse.get_product_stock(product=mock_product) == 1

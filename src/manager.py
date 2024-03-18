@@ -23,9 +23,6 @@ class OrderManager:
             raise ValueError("Required stock not available for product")
 
         self._order.items.append(item)
-        self._warehouse.reduce_product_stock(
-            product=item.product, amount_to_remove=item.quantity
-        )
 
     def calculate_total(self) -> float:
         order_total = sum(
@@ -35,3 +32,10 @@ class OrderManager:
             self._order.shipping_address.country.value, order_total
         )
         return order_total + shipping_cost
+
+    def confirm(self) -> None:
+        for item in self._order.items:
+            self._warehouse.reduce_product_stock(
+                product=item.product, amount_to_remove=item.quantity
+            )
+        self._history.orders.append(self._order)
