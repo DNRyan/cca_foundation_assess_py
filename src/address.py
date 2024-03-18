@@ -11,4 +11,3 @@ class Address:
     city: str
     postcode: str
     country: Country
-
